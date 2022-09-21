@@ -1,13 +1,30 @@
 import { Routes, Route } from "react-router-dom";
 import { GlobalStyle } from "./GlobalStyle";
+import { Box } from "./Box";
+
+import Home from "../pages/Home/Home";
+import Movies from "../pages/Movies/Movies";
+import { Header,Link } from "./App.styled";
 
 export const App = () => {
   return (
-    <>
+    <Box
+      m="0 auto"
+      p="0 16px">
+      <Header>
+        <nav>
+          <Link to="/">Home</Link>
+          <Link to="/movies">Movies</Link>
+        </nav>
+</Header>
+
       <Routes>
-        <Route path="/" element={<div>Home page</div>} />
+        <Route path="/" element={<Home/>} />
+        <Route path="/movies" element={<Movies />} />
+        <Route path="movies/:movieId" element={<div>Movie ID</div>} />
+        <Route path="*" element={<div>Not Found</div>}/>
       </Routes>
       <GlobalStyle/>
-    </>
+    </Box>
   )
 };
