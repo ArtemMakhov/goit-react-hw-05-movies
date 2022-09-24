@@ -20,7 +20,7 @@ export const fetchTrendingMovie = async () => {
 export const fetchMovieById = async movieId => {
   try {
     const {data} = await axios.get(
-      `${ID_URL}${movieId}?api_key=${API_KEY}&language=en-US`
+      `${ID_URL}${movieId}?api_key=${API_KEY}`
     );
     return data;
   } catch (error) {
@@ -28,12 +28,24 @@ export const fetchMovieById = async movieId => {
   }
 };
 
+export const fetchMovieCast = async movieId => {
+  try {
+    const response = await axios.get(
+      `${ID_URL}${movieId}/credits?api_key=${API_KEY}`
+    );
+    return response.data.cast;
+  } catch (error) {
+    return (console.log(error));
+  }
+};
 
-// export async function getMovies(url) {
-//     try {
-//         const responce = await axios.get(`${url}`);
-//         return responce.data;
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
+// export const fetchCastInfo = async movieId => {
+//   try {
+//     const response = await axios.get(
+//       `${ID_URL}${movieId}/credits?api_key=${API_KEY}&language=en-US`
+//     );
+//     return response.data.cast;
+//   } catch (error) {
+//     return notification(error.message);
+//   }
+// };
