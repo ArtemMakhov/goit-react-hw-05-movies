@@ -7,22 +7,12 @@ export const MovieDetails = () => {
     const { movieId } = useParams();
     const [movie, setMovie] = useState('');
    
-    useEffect(() => {
-        async function movieById() {
-            const data = await fetchMovieById(movieId);
-
-            setMovie(data);
-        }
-
-        movieById();
-    },[movieId])
     
-    // useEffect(() => {
-    //     fetchMovieById(movieId).then(data => {
-    //         console.log(data)
-    //         setMovie(data);
-    //     });
-    // }, [movieId]);
+    useEffect(() => {
+        fetchMovieById(movieId).then(data => {
+            setMovie(data);
+        });
+    }, [movieId]);
 
       const {
     original_title: title,
@@ -30,29 +20,36 @@ export const MovieDetails = () => {
     poster_path: poster,
     vote_average: vote,
     overview,
-    // genres,
+    genres,
   } = movie;
 
     return (
         <main>
-            {<img
+            {movie ? (<div><img
                 src={'https://image.tmdb.org/t/p/w500' + poster}
                 alt={title}
-                width="200"
+                width="300"
                 height="200"
-            />}
-            <p>{title} ({date})</p>
+            />
+            <p>{title} ({date.slice(0,4)})</p>
             <p>User score: {Math.round(vote * 100 / 10)}%</p>
             <h3>Overview</h3>
             <p>{overview}</p>
             <h3>Genres</h3>
-            <p>???</p>
+            <ul>
+                {genres.map(({ name, id }) => (
+                    <li key={id}>{ name}</li>
+                ))}
+            </ul></div>): (<p>console.error(error);</p>)}
 
             <div>
                 <b>Information</b>
                 <ul>
                     <li>
                         <Link to="cast">Cast</Link>
+                    </li>
+                    <li>
+                        <Link to="reviews">Reviews</Link>
                     </li>
                 </ul>
             </div>

@@ -4,44 +4,29 @@ import { useParams } from 'react-router-dom';
 import { fetchMovieCast } from '../../Api';
 
 export const Cast = () => {
-    const { movieId } = useParams();
-    const [cast, setCast] = useState([]);
+  const { movieId } = useParams();
+  const [cast, setCast] = useState([]);
 
-      useEffect(() => {
+  useEffect(() => {
     fetchMovieCast(movieId).then(response => setCast(response));
-      }, [movieId]);
+  }, [movieId]);
     
-    return (<>
-        {cast.map(({ profile_path: poster, name, character, cast_id }) => (
-            <div key={cast_id}>
-                <img src={poster} alt={name} />
-                <p>{name}</p>
-                <p>{character }</p>
-        </div>
+  return (
+    <>
+    {cast.map(({ profile_path, name, character, id }) => (
+      <div key={id}>
+        <img src={profile_path
+          ? 'https://image.tmdb.org/t/p/w500' + profile_path
+          : 'https://dummyimage.com/200x300/000/fff&text=No+photo'}
+          alt={name}
+          width="200"
+          height="100"
+        />
+        <p>{name}</p>
+        <p>{character}</p>
+      </div>
     ))}
-    </>)
+  </>);
     
-//     return (
-//     <StyledCast>
-//       {!actors.length > 0 ? (
-//         <h3>There are no cast info!</h3>
-//       ) : (
-//         actors.map(({ profile_path: poster, name, character, cast_id }) => (
-//           <li key={cast_id}>
-//             <img
-//               src={`${poster ? BASE_IMG_URL + poster : dummyImg}`}
-//               alt={name}
-//               width="100"
-//               height="200"
-//             />
-//             <p>
-//               <b>{name}</b>
-//             </p>
-//             <p>Character: {character}</p>
-//           </li>
-//         ))
-//       )}
-//     </StyledCast>
-//   );
-}
+};
 

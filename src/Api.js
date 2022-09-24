@@ -39,13 +39,14 @@ export const fetchMovieCast = async movieId => {
   }
 };
 
-// export const fetchCastInfo = async movieId => {
-//   try {
-//     const response = await axios.get(
-//       `${ID_URL}${movieId}/credits?api_key=${API_KEY}&language=en-US`
-//     );
-//     return response.data.cast;
-//   } catch (error) {
-//     return notification(error.message);
-//   }
-// };
+export const fetchMovieReviews = async movieId => {
+  try {
+    const response = await axios.get(
+      `${ID_URL}${movieId}/reviews?api_key=${API_KEY}&page=1`
+    );
+    return response.data.results;
+  } catch (error) {
+    return (console.log(error));
+  }
+};
+
