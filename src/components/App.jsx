@@ -16,7 +16,7 @@ export const App = () => {
       p="0 16px">
       <Header>
         <nav>
-          <Link to="/">Home</Link>
+          <Link to="/"end>Home</Link>
           <Link to="/movies">Movies</Link>
         </nav>
 </Header>

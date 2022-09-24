@@ -14,7 +14,7 @@ export const Reviews = () => {
     return (
         <div>
             {!review.length > 0 ? (
-                <h3>No reviews</h3>
+                <h3>We don't have any reviews for this movie</h3>
             ) : (
                 <ul>
                     {review.map(({ author, content, id }) => (
