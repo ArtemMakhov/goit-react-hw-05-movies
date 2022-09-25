@@ -4,7 +4,7 @@ const API_KEY = 'bb8332b99fe7bc8079c8a7da417e56ea';
 const BASE_URL = 'https://api.themoviedb.org/3';
 const TREND_URL = `${BASE_URL}/trending/movie/week?api_key=${API_KEY}`;
 const ID_URL = `${BASE_URL}/movie/`;
-// const SEARCH_BY_QUERY_URL = `${BASE_URL}/search/movie?api_key=${API_KEY}`;
+
 
 
  
@@ -24,7 +24,7 @@ export const fetchMovieById = async movieId => {
     );
     return data;
   } catch (error) {
-    return (console.log(error));
+    return console.log(error);
   }
 };
 
@@ -35,7 +35,7 @@ export const fetchMovieCast = async movieId => {
     );
     return response.data.cast;
   } catch (error) {
-    return (console.log(error));
+    return console.log(error);
   }
 };
 
@@ -49,4 +49,15 @@ export const fetchMovieReviews = async movieId => {
     return (console.log(error));
   }
 };
+
+export const fetchMovieSearch = async query => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/search/movie?api_key=${API_KEY}&page=1&query=${query}`
+    );
+    return response.data.results;
+  } catch (error) {
+    return console.log(error);
+  }
+}
 
