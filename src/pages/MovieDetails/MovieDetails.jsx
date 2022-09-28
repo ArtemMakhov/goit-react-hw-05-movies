@@ -1,7 +1,9 @@
 
-import { useParams, Link, Outlet, useLocation } from "react-router-dom";
+import { useParams, Outlet, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchMovieById } from "../../Api";
+import { Loader } from "components/Loader/Loader";
+import { BackLink,Title,Text,GenresList,List,InfoTitle,InfoLink } from "./MovieDetails.styled";
 
  const MovieDetails = () => {
     const { movieId } = useParams();
@@ -32,33 +34,36 @@ import { fetchMovieById } from "../../Api";
 
     return (
         <main>
-            <Link to={backLinkHref}>Back</Link>
+            <BackLink to={backLinkHref}>Back</BackLink>
            
-            {movie ? (<div><img
-                src={'https://image.tmdb.org/t/p/w500' + poster}
+            {movie ? (<div>
+                <img
+                src={poster ?
+                    'https://image.tmdb.org/t/p/w500' + poster : 
+                    'https://i.gifer.com/5h4.gif'}
                 alt={title}
                 width="300"
                 height="200"
             />
-                <p>{title} ({date.slice(0, 4)})</p>
-                <p>User score: {Math.round(vote * 100 / 10)}%</p>
+                <Title>{title} ({date.slice(0, 4)})</Title>
+                <Text>User score: {Math.round(vote * 100 / 10)}%</Text>
                 <h3>Overview</h3>
-                <p>{overview}</p>
+                <Text>{overview}</Text>
                 <h3>Genres</h3>
-                <ul>
+                <GenresList>
                     {genres.map(({ name, id }) => (
-                        <li key={id}>{name}</li>
+                        <List key={id}>{name}</List>
                     ))}
-                </ul></div>) : (<p>console.error(error);</p>)}
+                </GenresList></div>) : (<Loader/>)}
 
             <div>
-                <b>Information</b>
+                <InfoTitle>Information :</InfoTitle>
                 <ul>
                     <li>
-                        <Link to="cast">Cast</Link>
+                        <InfoLink to="cast">Cast</InfoLink>
                     </li>
                     <li>
-                        <Link to="reviews">Reviews</Link>
+                        <InfoLink to="reviews">Reviews</InfoLink>
                     </li>
                 </ul>
             </div>
