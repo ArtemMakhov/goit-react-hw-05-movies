@@ -29,7 +29,7 @@ import { BackLink,Title,Text,GenresList,List,InfoTitle,InfoLink } from "./MovieD
         genres,
     } = movie;
 
-    const backLinkHref = location.state?.from ?? "/";
+    const backLinkHref = location.state?.from ?? "/movies";
     
 
     return (
@@ -60,10 +60,10 @@ import { BackLink,Title,Text,GenresList,List,InfoTitle,InfoLink } from "./MovieD
                 <InfoTitle>Information :</InfoTitle>
                 <ul>
                     <li>
-                        <InfoLink to="cast">Cast</InfoLink>
+                        <InfoLink state={location.state} to="cast">Cast</InfoLink>
                     </li>
                     <li>
-                        <InfoLink to="reviews">Reviews</InfoLink>
+                        <InfoLink state={location.state} to="reviews">Reviews</InfoLink>
                     </li>
                 </ul>
             </div>

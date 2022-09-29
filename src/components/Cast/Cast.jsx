@@ -15,7 +15,9 @@ import { fetchMovieCast } from '../../Api';
     
   return (
     <Box as="ul">
-    {cast.map(({ profile_path, name, character, id }) => (
+      {!cast.length > 0 ? (
+        <p>There are no cast info!</p>
+    ) : (cast.map(({ profile_path, name, character, id }) => (
       <List key={id}>
         <img src={profile_path
           ? 'https://image.tmdb.org/t/p/w500' + profile_path
@@ -27,7 +29,7 @@ import { fetchMovieCast } from '../../Api';
         <Name>{name}</Name>
         <Character>{character}</Character>
       </List>
-    ))}
+    )))}
   </Box>);
     
 };
